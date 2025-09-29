@@ -1,4 +1,4 @@
-# Analisi e Segmentazione della Clientela per una Pizzeria
+# Segmentazione Strategica della Clientela: un Progetto di Consulenza Data-Driven
 
 **Autore:** Valerio Lapiello | **Data:** Settembre 2025 | **LinkedIn:** [Link al profilo](https://www.linkedin.com/in/valerio-lapiello-597801377/)
 
