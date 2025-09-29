@@ -1,6 +1,6 @@
 # Analisi e Segmentazione della Clientela per una Pizzeria
 
-**Autore:** Valerio [Il tuo cognome] | **Data:** Settembre 2025 | **LinkedIn:** [Link al profilo](https://www.linkedin.com/in/valerio-lapiello-597801377/)
+**Autore:** Valerio Lapiello | **Data:** Settembre 2025 | **LinkedIn:** [Link al profilo](https://www.linkedin.com/in/valerio-lapiello-597801377/)
 
 ---
 
@@ -45,11 +45,11 @@ L'analisi ha identificato **4 macro-segmenti strategici** con caratteristiche e 
 
 #### Mappa dei Segmenti di Clientela
 *La visualizzazione UMAP ha rivelato una struttura complessa del mercato, validando la scelta di un modello density-based.*
-![Mappa dei Cluster](link_alla_tua_immagine_cluster.png)
+![Mappa dei Cluster](plots/seg_cluster_map.png)
 
 #### Profilo Comparativo dei Cluster
 *La heatmap ha permesso di identificare le caratteristiche distintive di ogni cluster rispetto al cliente "medio".*
-![Heatmap dei Profili](link_alla_tua_heatmap.png)
+![Heatmap dei Profili](plots/seg_cluster_heatmap.png)
 
 ---
 
