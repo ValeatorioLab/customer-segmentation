@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>report_pizzeria_finale</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>consulenza-clustering</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7517,8 +7517,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Analisi-e-Segmentazione-della-Clientela-per-una-Pizzeria">Analisi e Segmentazione della Clientela per una Pizzeria<a class="anchor-link" href="#Analisi-e-Segmentazione-della-Clientela-per-una-Pizzeria">¶</a></h1><p>Autore: Valerio Lapiello
-Data: 28 Settembre 2025</p>
+<h1 id="Analisi-e-Segmentazione-della-Clientela-per-una-Pizzeria">Analisi e Segmentazione della Clientela per una Pizzeria<a class="anchor-link" href="#Analisi-e-Segmentazione-della-Clientela-per-una-Pizzeria">¶</a></h1><p>Autore: <em><strong>Valerio Lapiello</strong></em></p>
+<p>Data: 28 Settembre 2025</p>
 </div>
 </div>
 </div>
@@ -7697,7 +7697,22 @@ Data: 28 Settembre 2025</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2.3-Preparazione-e-Ingegneria-dei-Dati">2.3 Preparazione e Ingegneria dei Dati<a class="anchor-link" href="#2.3-Preparazione-e-Ingegneria-dei-Dati">¶</a></h3><p>In questa sezione, il dataset grezzo viene preparato per l'analisi. Il processo include il caricamento dei file, l'unione delle tabelle e la creazione delle metriche comportamentali e degli attributi demografici sintetici che costituiscono la base per la successiva segmentazione.</p>
+<h3 id="2.3-Preparazione-e-Ingegneria-dei-Dati:-Dal-Dato-Grezzo-all'Insight">2.3 Preparazione e Ingegneria dei Dati: Dal Dato Grezzo all'Insight<a class="anchor-link" href="#2.3-Preparazione-e-Ingegneria-dei-Dati:-Dal-Dato-Grezzo-all'Insight">¶</a></h3><p>Prima di ogni analisi, è fondamentale trasformare i dati grezzi in un formato pulito, strutturato e arricchito. Questa sezione illustra il processo di <strong>Data Engineering</strong> e <strong>Feature Engineering</strong> che ha costituito la base per l'intero progetto.</p>
+<p>Il processo si è articolato in tre fasi principali:</p>
+<p><strong>1. Unificazione dei Dati (Data Engineering)</strong>
+Le quattro tabelle sorgente (<code>orders</code>, <code>order_details</code>, <code>pizzas</code>, <code>pizza_types</code>) sono state unificate tramite una serie di operazioni di <code>merge</code>. Il risultato è un unico DataFrame transazionale in cui ogni riga rappresenta una singola pizza all'interno di un ordine specifico, arricchita con tutte le informazioni disponibili (prezzo, categoria, data, ora, ecc.).</p>
+<p><strong>2. Creazione di Metriche Comportamentali (Feature Engineering)</strong>
+Il dataset originale mancava di un identificativo del cliente. Per superare questo limite, è stato creato un set di <strong>"pseudo-clienti"</strong> fittizi. Ipotizzando una base clienti plausibile di 8.000 utenti, ogni ordine unico è stato assegnato casualmente a un cliente (il processo è stato reso riproducibile tramite l'impostazione di un <code>random_state</code>).
+Questa operazione ha permesso di aggregare i dati a livello di singolo cliente e di calcolare un set di <strong>metriche comportamentali reali e misurabili</strong>:</p>
+<ul>
+<li><strong>Spesa Totale e Media</strong>: L'impatto economico di ogni cliente.</li>
+<li><strong>Frequenza d'Acquisto</strong>: Il livello di lealtà e abitudine.</li>
+<li><strong>Preferenze di Categoria</strong>: Le tipologie di pizza più scelte.</li>
+<li><strong>Rapporto Weekend/Feriale</strong>: Le abitudini di consumo temporali.
+Il risultato di questa fase è un nuovo DataFrame, <code>customers_df</code>, che rappresenta la "carta d'identità" comportamentale di ogni cliente.</li>
+</ul>
+<p><strong>3. Generazione di Attributi Demografici Sintetici (Feature Engineering)</strong>
+Per arricchire ulteriormente i profili e abilitare una segmentazione più profonda, sono stati ingegnerizzati degli attributi demografici sintetici (<code>persona</code>, <code>income_bracket</code>). Basandosi sulle metriche comportamentali reali, è stata definita una funzione con una logica a punteggio, utilizzando soglie dinamiche calcolate dai dati stessi (medie e quartili). Questo approccio <strong>data-driven</strong> assicura che i profili demografici, sebbene fittizi, siano logicamente coerenti con il comportamento d'acquisto osservato.</p>
 </div>
 </div>
 </div>
@@ -8709,7 +8724,7 @@ DataFrame unificato creato con successo. Di seguito un'anteprima:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="5.-Risultati:-Mappatura-e-Profilazione-dei-Segmenti-di-Clientela-">5. Risultati: Mappatura e Profilazione dei Segmenti di Clientela <a id="risultati"></a><a class="anchor-link" href="#5.-Risultati:-Mappatura-e-Profilazione-dei-Segmenti-di-Clientela-">¶</a></h2><p>L'applicazione del modello HDBSCAN sui dati comportamentali ha permesso di mappare la clientela in <strong>12 cluster distinti</strong> e un gruppo di outlier. Questa sezione presenta una panoramica di questi segmenti, analizzandone le caratteristiche quantitative per comprenderne l'identità e il valore.</p>
+<h2 id="5.-Risultati:-Mappatura-e-Profilazione-dei-Segmenti-di-Clientela-">5. Risultati: Mappatura e Profilazione dei Segmenti di Clientela <a id="risultati"></a><a class="anchor-link" href="#5.-Risultati:-Mappatura-e-Profilazione-dei-Segmenti-di-Clientela-">¶</a></h2><p>L'applicazione del modello HDBSCAN sui dati comportamentali ha permesso di mappare la clientela in <strong>12 cluster distinti</strong>, di cui un gruppo di outlier. Questa sezione presenta una panoramica di questi segmenti, analizzandone le caratteristiche quantitative per comprenderne l'identità e il valore.</p>
 <p>La mappa sottostante, basata sulla proiezione UMAP, visualizza la posizione e la forma dei cluster identificati, offrendo una prima visione della complessa struttura del mercato.</p>
 </div>
 </div>
